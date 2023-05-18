@@ -10,6 +10,7 @@ public:
     HeroBullet();
     HeroBullet(int xPos, int yPos, int horizontalSpeed = 800);
     virtual ~HeroBullet() {};
+    QPolygon getHitbox() override;
 
     //bool isNeededToBeDeleted(QGraphicsScene* scene);
 //signals:

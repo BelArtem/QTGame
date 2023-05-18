@@ -1,17 +1,20 @@
 #ifndef ENEMY_H
 #define ENEMY_H
-#include <QImage>
-#include <bullet.h>
+#include <QPixmap>
 
 class Enemy
 {
 public:
     Enemy();
-    ~Enemy() = default;
+    virtual ~Enemy() = default;
 
-    QImage image_;
+    QPixmap image_;
     QPolygon hitBox_;
-    double speed_;
+    int horizontal_speed_;
+    int x_coordinate_;
+    int y_coordinate_;
+
+    virtual QPolygon getHitbox() = 0;
 
 };
 

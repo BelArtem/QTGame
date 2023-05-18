@@ -25,7 +25,7 @@ private:
     //QGraphicsScene* scene_;
     Scene* scene_;
     QGraphicsView* view_;
-    QGraphicsRectItem* rectangle;
+    //QGraphicsRectItem* rectangle;
     //Ui::MainWindow *ui;
 
 };

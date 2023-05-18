@@ -13,6 +13,7 @@ SOURCES += \
     bulletmanager.cpp \
     enemy.cpp \
     enemybullet.cpp \
+    enemytype1.cpp \
     hero.cpp \
     herobullet.cpp \
     main.cpp \
@@ -25,6 +26,7 @@ HEADERS += \
     bulletmanager.h \
     enemy.h \
     enemybullet.h \
+    enemytype1.h \
     hero.h \
     herobullet.h \
     mainwindow.h \
