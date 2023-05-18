@@ -3,5 +3,6 @@
         <file>sources/images/background.jpg</file>
         <file>sources/images/hero.png</file>
         <file>sources/images/herobullet.png</file>
+        <file>sources/images/enemy1.png</file>
     </qresource>
 </RCC>

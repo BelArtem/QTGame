@@ -3,11 +3,13 @@
 
 Scene::Scene(QObject* parent): QGraphicsScene(parent)
 {
+    //model_ = new Model();
     hero_item_ = new QGraphicsPixmapItem(model_.getHero().getPixmap());
     bullets_group_ = new QGraphicsItemGroup();
     enemies_group_ = new QGraphicsItemGroup();
     bullet_pixmaps_ = QVector<QGraphicsPixmapItem*>(0);
     enemy_pixmaps_ = QVector<QGraphicsPixmapItem*>(0);
+    //is_first_shot_ = true;
     //bullet_manager_  = new BulletManager();
 //    QPixmap im (":/images/sources/images/background.jpg");
 //    QGraphicsPixmapItem image (im);
@@ -20,18 +22,20 @@ Scene::Scene(QObject* parent): QGraphicsScene(parent)
 //    this->addItem(hero_item_);
 //    hero_item_->setPos(model_.getHero().getXCoordinate(),model_.getHero().getYCoordinate());
 
-    moveHeroTimer_ = new QTimer();
+    move_hero_timer_ = new QTimer();
 //    moveHeroTimer_->setInterval(1000/144);
 //    moveHeroTimer_->start();
-    QObject::connect(moveHeroTimer_, &QTimer::timeout, this, &Scene::moveHeroTimerEvent);
+    QObject::connect(move_hero_timer_, &QTimer::timeout, this, &Scene::moveHeroTimerEvent);
 
-    bulletsRefreshTimer_ = new QTimer();
-    QObject::connect(bulletsRefreshTimer_, &QTimer::timeout, this, &Scene::manageBulletsTimerEvent);
+    bullets_refresh_timer_ = new QTimer();
+    QObject::connect(bullets_refresh_timer_, &QTimer::timeout, this, &Scene::manageBulletsTimerEvent);
     //QObject::connect(bulletsRefreshTimer_, &QTimer::timeout, bullet_manager_, &BulletManager::updateBulletsCoordinates);
 
-    shootingLimitTimer_ = new QTimer();
-    QObject::connect(shootingLimitTimer_, &QTimer::timeout, this, &Scene::heroShootTimerEvent);
+    shooting_limit_timer_ = new QTimer();
+    QObject::connect(shooting_limit_timer_, &QTimer::timeout, this, &Scene::heroShootTimerEvent);
 
+    enemies_refrest_timer_ = new QTimer();
+    QObject::connect(enemies_refrest_timer_, &QTimer::timeout, this, &Scene::manageEnemiesTimerEvent);
 
     this->setUpScene();
 
@@ -53,13 +57,14 @@ void Scene::setUpScene(){
     model_.getHero().setYCoordinate(this->height()/2);
     this->addItem(hero_item_);
     hero_item_->setPos(model_.getHero().getXCoordinate(),model_.getHero().getYCoordinate());
-    moveHeroTimer_->setInterval(6);
-    moveHeroTimer_->start();
-    bulletsRefreshTimer_->setInterval(3);
-    bulletsRefreshTimer_->start();
-    shootingLimitTimer_->setInterval(80);
-    shootingLimitTimer_->start();
-
+    move_hero_timer_->setInterval(6);
+    move_hero_timer_->start();
+    bullets_refresh_timer_->setInterval(3);
+    bullets_refresh_timer_->start();
+    shooting_limit_timer_->setInterval(80);
+    shooting_limit_timer_->start();
+    enemies_refrest_timer_->setInterval(3);
+    enemies_refrest_timer_->start();
 }
 //void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event){
 ////    if(event->button() == Qt::LeftButton){
@@ -75,6 +80,21 @@ void Scene::keyPressEvent(QKeyEvent *event){
     }
     if (event->key() == Qt::Key_Space){
         keys_[event->key()] = true;
+
+
+        //vvvvvvvvvvvv
+//        if(isFirstShot_){
+//            int xPos = model_.getHero().getXCoordinate() + model_.getHero().getPixmap().width()- 40;
+//            int yPos = model_.getHero().getYCoordinate() + model_.getHero().getPixmap().height() / 2 - 60;
+//            bullet_manager_.addBullet(BulletType::Hero, xPos, yPos);
+//            isFirstShot_ = false;
+//            //shootingLimitTimer_->start();
+
+//        }
+//        else {
+//            shootingLimitTimer_->start();
+//        }
+        //vvvvvvvvvvvv
         //shootingLimitTimer_->start();
     }
 //    if (event->key() == Qt::Key_Space){
@@ -128,6 +148,11 @@ void Scene::keyPressEvent(QKeyEvent *event){
 void Scene::keyReleaseEvent(QKeyEvent *event){
     keys_[event->key()] = false;
     if (event->key() == Qt::Key_Space){
+
+        //vvvvvvvvvvvvvvv
+//        isFirstShot_ = true;
+//        shootingLimitTimer_->stop();
+        //vvvvvvvvvvvvvvv
         //shootingLimitTimer_->stop();
     }
 
@@ -233,11 +258,11 @@ void Scene::moveHeroTimerEvent(){
 //        hero_item_->setPos(model_.getHero().getXCoordinate(),model_.getHero().getYCoordinate());
     }
     if (abs(currentXSpeed) + abs(currentYSpeed) > fmax(model_.getHero().getHorizontalSpeed(), model_.getHero().getHorizontalSpeed())){
-        newXCoordinate = model_.getHero().getXCoordinate() + static_cast<int>(currentXSpeed * moveHeroTimer_->interval() / 1000.0 / sqrt(2));
-        newYCoordinate = model_.getHero().getYCoordinate() + static_cast<int>(currentYSpeed * moveHeroTimer_->interval() / 1000.0 / sqrt(2));
+        newXCoordinate = model_.getHero().getXCoordinate() + static_cast<int>(currentXSpeed * move_hero_timer_->interval() / 1000.0 / sqrt(2));
+        newYCoordinate = model_.getHero().getYCoordinate() + static_cast<int>(currentYSpeed * move_hero_timer_->interval() / 1000.0 / sqrt(2));
     }else {
-        newXCoordinate = model_.getHero().getXCoordinate() + static_cast<int>(currentXSpeed * moveHeroTimer_->interval() / 1000.0);
-        newYCoordinate = model_.getHero().getYCoordinate() + static_cast<int>(currentYSpeed * moveHeroTimer_->interval() / 1000.0);
+        newXCoordinate = model_.getHero().getXCoordinate() + static_cast<int>(currentXSpeed * move_hero_timer_->interval() / 1000.0);
+        newYCoordinate = model_.getHero().getYCoordinate() + static_cast<int>(currentYSpeed * move_hero_timer_->interval() / 1000.0);
     }
 //    if (newXCoordinate > this->width() || newXCoordinate < -model_.getHero().getPixmap().width()){
 //        newXCoordinate = model_.getHero().getXCoordinate();
@@ -255,6 +280,8 @@ void Scene::moveHeroTimerEvent(){
     model_.getHero().setYCoordinate(newYCoordinate);
 
     hero_item_->setPos(newXCoordinate,newYCoordinate);
+//    QPen(QColor(Qt::green), 2);
+//    this->addPolygon(model_.getHero().getHitBox());
 
 }
 
@@ -274,11 +301,26 @@ void Scene::heroShootTimerEvent(){
 //}
 
 void Scene::manageBulletsTimerEvent(){
-    bullet_manager_.updateBulletsCoordinates(bulletsRefreshTimer_->interval());
+    if (bullet_manager_.getHeroBulletsAmount() == 0){
+        return;
+    }
+    QVector<QGraphicsPixmapItem*> vec = bullet_manager_.getBulletsPixmapItems();
+    for (auto& item: vec){
+        bullets_group_->removeFromGroup(item);
+    }
+    for (int i = 0; i < vec.size(); ++i){
+        delete vec[i];
+    }
+   vec.clear();
+
+
+    bullet_manager_.updateBulletsCoordinates(bullets_refresh_timer_->interval());
     bullet_manager_.clearBullets(this);
-    this->removeItem(bullets_group_);
-    this->destroyItemGroup(bullets_group_);
-    bullets_group_ = new QGraphicsItemGroup();
+    //this->removeItem(bullets_group_);
+    //this->destroyItemGroup(bullets_group_);
+    //delete bullets_group_;
+    //bullets_group_.
+    //bullets_group_ = new QGraphicsItemGroup();
     //bullet_pixmaps_.clear();
 //    for (auto& item: bullet_pixmaps_){
 //        delete item;
@@ -286,10 +328,42 @@ void Scene::manageBulletsTimerEvent(){
     for (int i = 0; i < bullet_pixmaps_.size(); ++i){
         delete bullet_pixmaps_[i];
     }
+    bullet_pixmaps_.clear();
+//    if (bullet_manager_.hero_bullets_.size() > 0){
+//        QPen(QColor(Qt::green), 2);
+//        this->addPolygon(bullet_manager_.hero_bullets_[0]->getHitbox());
+//    }
 
     bullet_pixmaps_ = bullet_manager_.getBulletsPixmapItems();
     for (auto& item: bullet_pixmaps_){
         bullets_group_->addToGroup(item);
     }
     this->addItem(bullets_group_);
+}
+
+void Scene::manageEnemiesTimerEvent(){
+    if (model_.getEnemiesAmount() == 0){
+        return;
+    }
+    QVector<QGraphicsPixmapItem*> vec = model_.getEnemiesPixmapItems();
+    for (auto& item: vec){
+        enemies_group_->removeFromGroup(item);
+    }
+    for (int i = 0; i < vec.size(); ++i){
+        delete vec[i];
+    }
+    vec.clear();
+
+
+    model_.updateEnemiesCoordinates(enemies_refrest_timer_->interval());
+    model_.clearEnemies();
+    for (int i = 0; i < enemy_pixmaps_.size(); ++i){
+        delete enemy_pixmaps_[i];
+    }
+    enemy_pixmaps_.clear();
+    enemy_pixmaps_ = model_.getEnemiesPixmapItems();
+    for (auto& item: enemy_pixmaps_){
+        enemies_group_->addToGroup(item);
+    }
+    this->addItem(enemies_group_);
 }

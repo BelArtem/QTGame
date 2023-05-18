@@ -14,10 +14,6 @@ enum class BulletType{
     EnemyType1
 };
 
-
-///TODO:
-/// delete bullets, whick are out of map
-
 class BulletManager: public QObject {
     Q_OBJECT
 public:
@@ -31,6 +27,8 @@ public:
     QVector<QGraphicsPixmapItem*> getBulletsPixmapItems();
     void updateBulletsCoordinates(int interval);
     void clearBullets(QGraphicsScene* scene);
+    size_t getHeroBulletsAmount();
+    //QVector<Bullet*> hero_bullets_;
 
 
 private:

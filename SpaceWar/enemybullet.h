@@ -2,12 +2,13 @@
 #define ENEMYBULLET_H
 #include <bullet.h>
 
-class EnemyBullet : public Bullet
-{
-public:
-    EnemyBullet();
-    EnemyBullet(int xPos, int yPos, int horizontalSpeed = 1000);
-    ~EnemyBullet() = default;
-};
+//class EnemyBullet : public Bullet
+//{
+//public:
+//    EnemyBullet();
+//    EnemyBullet(int xPos, int yPos, int horizontalSpeed = 1000);
+//    ~EnemyBullet() = default;
+//    QPolygon getHitbox() override;
+//};
 
 #endif // ENEMYBULLET_H

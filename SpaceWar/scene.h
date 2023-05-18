@@ -17,16 +17,12 @@ class Scene : public QGraphicsScene
     Q_OBJECT
 
 public:
-    //enum Mode {NoMode, SelectObject, DrawLine};
     Scene(QObject* parent = 0);
-    //~Scene();
     virtual ~Scene() {};
-    //void setMode(Mode mode);
 protected:
 //    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 //    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 //    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
-    //void addItem (Hero)S
     void keyPressEvent(QKeyEvent *event) override;
     void keyReleaseEvent(QKeyEvent *event) override;
 private:
@@ -42,20 +38,20 @@ private:
 
 
 
-    QTimer* moveHeroTimer_;
+    QTimer* move_hero_timer_;
     QMap<int, bool> keys_;
-    QTimer* bulletsRefreshTimer_;
-    QTimer* shootingLimitTimer_;
+    QTimer* bullets_refresh_timer_;
+    QTimer* shooting_limit_timer_;
+    QTimer* enemies_refrest_timer_;
+    //bool is_first_shot_;
     //Hero hero;
 
-    //Mode sceneMode;
-    //QPointF origPoint;
     //QGraphicsLineItem* itemToDraw;
-    //void makeItemsControllable(bool areControllable);
 private slots:
     void moveHeroTimerEvent();
     void manageBulletsTimerEvent();
     void heroShootTimerEvent();
+    void manageEnemiesTimerEvent();
 };
 
 #endif // SCENE_H

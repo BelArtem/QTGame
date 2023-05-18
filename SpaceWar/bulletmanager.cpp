@@ -25,10 +25,10 @@ void BulletManager::addBullet(BulletType type,int posX, int posY){
             newBullet = new HeroBullet(posX, posY);
             hero_bullets_.push_back(newBullet);
         break;
-        case BulletType::EnemyType1:
-            newBullet = new EnemyBullet(posX, posY);
-            enemy_bullets_.push_back(newBullet);
-        break;
+//        case BulletType::EnemyType1:
+//            newBullet = new EnemyBullet(posX, posY);
+//            enemy_bullets_.push_back(newBullet);
+//        break;
         default:
             qFatal("fatal error");
     }
@@ -67,12 +67,23 @@ void BulletManager::updateBulletsCoordinates(int interval){
 
 void BulletManager::clearBullets(QGraphicsScene* scene){
     for (int i = 0; i < hero_bullets_.size(); ++i){
-        if (hero_bullets_[i]->x_coordinate_ > scene->width()
-                + hero_bullets_[i]->image_.width()){
+       if (hero_bullets_[i]->x_coordinate_ > scene->width()){
+//                + hero_bullets_[i]->image_.width()){
 //        if (hero_bullets_[i]->x_coordinate_ > scene->width()/2){
-//            hero_bullets_.erase(hero_bullets_.begin() + i);
-//            --i;
+            delete hero_bullets_[i];
+//          HeroBullet* bul;
+//          if (dynamic_cast<HeroBullet*>(hero_bullets_[i]) != nullptr){
+//              bul = dynamic_cast<HeroBullet*>(hero_bullets_[i]);
+//              delete bul;
+//          }
+            //bul = hero_bullets_[i];
+            hero_bullets_.erase(hero_bullets_.begin() + i);
+            --i;
             //qDebug() <<"Bullet has been deleted"<<hero_bullets_.size();
         }
     }
+}
+
+size_t BulletManager::getHeroBulletsAmount(){
+    return hero_bullets_.size();
 }
