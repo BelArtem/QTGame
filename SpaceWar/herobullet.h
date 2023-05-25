@@ -8,7 +8,7 @@ class HeroBullet : public QObject, public Bullet
     Q_OBJECT
 public:
     HeroBullet();
-    HeroBullet(int xPos, int yPos, int horizontalSpeed = 800);
+    HeroBullet(int xPos, int yPos, int horizontalSpeed = 1300);
     virtual ~HeroBullet() {};
     QPolygon getHitbox() override;
 

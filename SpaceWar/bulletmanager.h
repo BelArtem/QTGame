@@ -23,12 +23,19 @@ public:
     virtual ~BulletManager() {};
 
     void addBullet(BulletType type,int posX, int posY);
+    //void addEnemyBullet(Bullet* bulet);
     //QGraphicsItemGroup* getBulletsItemGroup();
     QVector<QGraphicsPixmapItem*> getBulletsPixmapItems();
     void updateBulletsCoordinates(int interval);
     void clearBullets(QGraphicsScene* scene);
     size_t getHeroBulletsAmount();
+    size_t getEnemyBulletsAmount();
+    QVector<Bullet*>& getHeroBullets();
+    QVector<Bullet*>& getEnemyBullets();
     //QVector<Bullet*> hero_bullets_;
+
+    //QVector<Bullet*> hero_bullets_;
+    //QVector<Bullet*> enemy_bullets_;
 
 
 private:
@@ -39,6 +46,7 @@ private:
 public slots:
     //void updateBulletsCoordinates();
     //void heroBulletRemove();
+    void addBulletEvent(BulletType type,int posX, int posY);
 };
 
 #endif // BULLETMANAGER_H

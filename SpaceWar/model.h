@@ -8,11 +8,10 @@
 #include <QTimer>
 #include <QGraphicsItemGroup>
 #include <QGraphicsScene>
+#include <enemygenerator.h>
+#include <bullet.h>
+#include <bulletmanager.h>
 
-enum class EnemyType{
-    EnemyType1 = 0
-
-};
 
 class Model: public QObject
 {
@@ -30,16 +29,35 @@ public:
     void setRandomizerAreaHeight(int height);
     void setAreaWidth(int width);
     size_t getEnemiesAmount();
+    //QVector<Bullet*>* getAllEnemyBullets();
+    //void getAllEnemyBullets(QVector<Bullet*>& vec);
+    BulletManager* getBulletManager();
+    QVector<Enemy*>& getEnemies();
+    void stopAllEvents();
+
+
 
 private:
+    BulletManager bullet_manager_;
+
+
+
     QVector<Enemy*> enemies_;
     Hero hero_;
     QTimer* spawn_enemy_timer_;
     int randomizer_area_height_;
     int area_width_;
+    EnemyGenerator generator_;
+    //QTimer* getBulletsTimer_;
 
 private slots:
     void spawnEnemyTimerEvent();
+    //void
+
+public slots:
+    void increaseSpawnSpeed(int millisec);
+signals:
+    //void enemyPassed();
 
 };
 

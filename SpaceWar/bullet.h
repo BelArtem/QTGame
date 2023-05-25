@@ -14,6 +14,8 @@ public:
     int horizontal_speed_;
     int x_coordinate_;
     int y_coordinate_;
+    bool is_eliminated_;
+    int damage_;
 
     virtual QPolygon getHitbox() = 0;
 

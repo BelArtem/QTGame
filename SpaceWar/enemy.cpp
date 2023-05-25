@@ -2,5 +2,5 @@
 
 Enemy::Enemy()
 {
-
+    shoot_timer_ = new QTimer();
 }

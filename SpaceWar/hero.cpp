@@ -10,10 +10,16 @@ Hero::Hero()
                          , {13,135}, {19,132}, {25,118}, {80,111}, {87,97}
                          , {88,82}, {98,73}};
     hitBox_ = QPolygon(list);
-    horizontal_speed_ = 500;
-    vertical_speed_ = 500;
+    horizontal_speed_ = 950;
+    vertical_speed_ = 950;
     x_coordinate_ = 0;
     y_coordinate_ = 0;
+    is_eliminated_ = false;
+    hp_ = 100;
+    shoot_timer_ = new QTimer();
+    shoot_timer_->setInterval(400);
+    shoot_timer_->start();
+    QObject::connect(shoot_timer_, &QTimer::timeout, this, &Hero::shootTimerEvent);
 }
 
 void Hero::setHorizontalSpeed(int speed){
@@ -35,6 +41,17 @@ void Hero::setYCoordinate(int y){
 //QImage Hero::getImage(){
 //    return image_;
 //}
+
+void Hero::setEliminated (bool flag){
+    is_eliminated_ = flag;
+}
+
+void Hero::setHP (int newHP){
+    hp_ = newHP;
+    if (hp_ <=0){
+        emit isDestroyed();
+    }
+}
 
 QPixmap Hero::getPixmap(){
     return image_;
@@ -65,4 +82,21 @@ QPolygon Hero::getHitBox(){
     return result;
 }
 
+bool Hero::getEliminated(){
+    return is_eliminated_;
+}
 
+int Hero::getHP(){
+    return hp_;
+}
+
+void Hero::stopShootingTimer(){
+    shoot_timer_->stop();
+}
+void Hero::startShootingTimer(){
+    shoot_timer_->start();
+}
+
+void Hero::shootTimerEvent(){
+    emit bulletInfo(BulletType::Hero, this->x_coordinate_, this->y_coordinate_);
+}
