@@ -13,25 +13,29 @@ SOURCES += \
     bulletmanager.cpp \
     enemy.cpp \
     enemybullet.cpp \
+    enemygenerator.cpp \
     enemytype1.cpp \
     hero.cpp \
     herobullet.cpp \
     main.cpp \
     mainwindow.cpp \
     model.cpp \
-    scene.cpp
+    scene.cpp \
+    score.cpp
 
 HEADERS += \
     bullet.h \
     bulletmanager.h \
     enemy.h \
     enemybullet.h \
+    enemygenerator.h \
     enemytype1.h \
     hero.h \
     herobullet.h \
     mainwindow.h \
     model.h \
-    scene.h
+    scene.h \
+    score.h
 
 FORMS += \
     mainwindow.ui
