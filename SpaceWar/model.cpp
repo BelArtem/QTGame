@@ -12,9 +12,9 @@ Model::Model()
     QObject::connect(spawn_enemy_timer_, &QTimer::timeout, this, &Model::spawnEnemyTimerEvent);
     //spawn_enemy_timer_->setInterval(2000);
     spawn_enemy_timer_->setInterval(2000);
-    spawn_enemy_timer_->start();
+    //spawn_enemy_timer_->start();
 
-    QObject::connect(&hero_, &Hero::bulletInfo, &bullet_manager_, &BulletManager::addBulletEvent);
+    //QObject::connect(&hero_, &Hero::bulletInfo, &bullet_manager_, &BulletManager::addBulletEvent);
 }
 
 Hero& Model::getHero(){
@@ -26,19 +26,19 @@ Hero& Model::getHero(){
 //}
 
 void Model::spawnEnemyTimerEvent(){
-//    Enemy* newEnemy = new EnemyType1();
+    //    Enemy* newEnemy = new EnemyType1();
 
-//    //possibly here will be generator of enemy type
+    //    //possibly here will be generator of enemy type
 
-//    //int a = newEnemy->image_.height();
-//    int randomHeight = qrand() % (981 - newEnemy->image_.height());
-//    newEnemy->x_coordinate_ = area_width_;
-//    newEnemy->y_coordinate_ = randomHeight;
+    //    //int a = newEnemy->image_.height();
+    //    int randomHeight = qrand() % (981 - newEnemy->image_.height());
+    //    newEnemy->x_coordinate_ = area_width_;
+    //    newEnemy->y_coordinate_ = randomHeight;
 
-//    enemies_.push_back(newEnemy);
+    //    enemies_.push_back(newEnemy);
     EnemyType type = EnemyType::EnemyType1;
     Enemy* newEnemy = generator_.generateEnemy(type, area_width_);
-//    QObject::connect(newEnemy->shoot_timer_, &QTimer::timeout, &bullet_manager_, &BulletManager::addEnemyBulletEvent);
+    //    QObject::connect(newEnemy->shoot_timer_, &QTimer::timeout, &bullet_manager_, &BulletManager::addEnemyBulletEvent);
     EnemyType1* enemy = dynamic_cast<EnemyType1*>(newEnemy);
     if (enemy != nullptr){
         QObject::connect(enemy, &EnemyType1::bulletInfo, &bullet_manager_, &BulletManager::addBulletEvent);
@@ -68,21 +68,37 @@ void Model::updateEnemiesCoordinates(int interval){
     }
 }
 
-void Model::clearEnemies(){
+void Model::clearUnusedEnemies(){
     for (int i = 0; i < enemies_.size(); ++i){
-//       if (enemies_[i]->x_coordinate_ < -enemies_[i]->image_.width()){
-//            emit enemyPassed();
-//        }
-       if (enemies_[i]->x_coordinate_ < -enemies_[i]->image_.width() || enemies_[i]->is_eliminated_){
-           EnemyType1* enemy = dynamic_cast<EnemyType1*>(enemies_[i]);
-           if (enemy != nullptr){
-               QObject::disconnect(enemy, &EnemyType1::bulletInfo, &bullet_manager_, &BulletManager::addBulletEvent);
-           }
-           //QObject::disconnect(enemies_[i], &Enemy::BulletInfo, &bullet_manager_, &BulletManager::addEnemyBulletEvent);
+        //       if (enemies_[i]->x_coordinate_ < -enemies_[i]->image_.width()){
+        //            emit enemyPassed();
+        //        }
+        if (enemies_[i]->x_coordinate_ < -enemies_[i]->image_.width() || enemies_[i]->is_eliminated_){
+            EnemyType1* enemy = dynamic_cast<EnemyType1*>(enemies_[i]);
+            if (enemy != nullptr){
+                QObject::disconnect(enemy, &EnemyType1::bulletInfo, &bullet_manager_, &BulletManager::addBulletEvent);
+            }
+            //QObject::disconnect(enemies_[i], &Enemy::BulletInfo, &bullet_manager_, &BulletManager::addEnemyBulletEvent);
             delete enemies_[i];
             enemies_.erase(enemies_.begin() + i);
             --i;
         }
+    }
+}
+
+void Model::clearAllEnemies(){
+    for (int i = 0; i < enemies_.size(); ++i){
+        //       if (enemies_[i]->x_coordinate_ < -enemies_[i]->image_.width()){
+        //            emit enemyPassed();
+        //        }
+        EnemyType1* enemy = dynamic_cast<EnemyType1*>(enemies_[i]);
+        if (enemy != nullptr){
+            QObject::disconnect(enemy, &EnemyType1::bulletInfo, &bullet_manager_, &BulletManager::addBulletEvent);
+        }
+        //QObject::disconnect(enemies_[i], &Enemy::BulletInfo, &bullet_manager_, &BulletManager::addEnemyBulletEvent);
+        delete enemies_[i];
+        enemies_.erase(enemies_.begin() + i);
+        --i;
     }
 }
 
@@ -133,9 +149,20 @@ QVector<Enemy*>& Model::getEnemies(){
     return enemies_;
 }
 
+void Model::startSpawnTimer(){
+    spawn_enemy_timer_->start();
+}
+
+void Model::stopSpawnTimer(){
+    spawn_enemy_timer_->stop();
+}
+
 void Model::stopAllEvents(){
     spawn_enemy_timer_->stop();
-    hero_.stopShootingTimer();
+    for (auto& enemy: enemies_){
+        enemy->stopShootTimer();
+    }
+    //hero_.stopShootingTimer();
 }
 
 void Model::increaseSpawnSpeed(int millisec){
@@ -143,4 +170,8 @@ void Model::increaseSpawnSpeed(int millisec){
         return;
     }
     spawn_enemy_timer_->setInterval(spawn_enemy_timer_->interval() - millisec);
+}
+
+Model::~Model(){
+    delete spawn_enemy_timer_;
 }

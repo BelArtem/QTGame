@@ -8,13 +8,13 @@ class HeroBullet : public QObject, public Bullet
     Q_OBJECT
 public:
     HeroBullet();
-    HeroBullet(int xPos, int yPos, int horizontalSpeed = 1300);
+    HeroBullet(int xPos, int yPos, int horizontalSpeed = 1000);
     virtual ~HeroBullet() {};
     QPolygon getHitbox() override;
 
     //bool isNeededToBeDeleted(QGraphicsScene* scene);
-//signals:
-//    void destroyHeroBullet(this);
+    //signals:
+    //    void destroyHeroBullet(this);
 };
 
 #endif // HEROBULLET_H

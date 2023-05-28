@@ -16,8 +16,12 @@ void Score::addScore(int score){
     int previous = score_ % 10;
     score_ += score;
     if (score_ % 10 < previous){
-        emit makeMoreDifficult(200);
+        emit makeMoreDifficult(40);
     }
     setPlainText(QString("Score:") + QString::number(score_));
 
+}
+
+void Score::setScore(int score){
+    score_ = score;
 }

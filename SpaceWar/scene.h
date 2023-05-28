@@ -1,5 +1,6 @@
 #ifndef SCENE_H
 #define SCENE_H
+
 #include <QGraphicsScene>
 #include <model.h>
 #include <bulletmanager.h>
@@ -14,6 +15,11 @@
 #include <QProgressBar>
 #include <QLabel>
 #include <score.h>
+#include <QMediaPlayer>
+#include <QAudioOutput>
+#include <QMediaPlaylist>
+#include <gameovermenu.h>
+#include <QGraphicsProxyWidget>
 
 class Scene : public QGraphicsScene
 {
@@ -21,7 +27,9 @@ class Scene : public QGraphicsScene
 
 public:
     Scene(QObject* parent = 0);
-    virtual ~Scene() {};
+    virtual ~Scene();
+    //void resizeScene();
+    void startGame();
 protected:
 //    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 //    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
@@ -30,10 +38,11 @@ protected:
     void keyReleaseEvent(QKeyEvent *event) override;
 private:
     void setUpScene();
+    void prepareScene();
     //void stopMoving();
     //void checkHits();
 private:
-    Model model_;
+    Model* model_;
     //BulletManager bullet_manager_;
     QGraphicsItem* hero_item_;
     //QGraphicsItem* score_;
@@ -41,7 +50,14 @@ private:
     QGraphicsItemGroup* enemies_group_;
     QVector<QGraphicsPixmapItem*> bullet_pixmaps_;
     QVector<QGraphicsPixmapItem*> enemy_pixmaps_;
+    QProgressBar* health_bar_;
     bool block_moving_;
+    Score* score_;
+    QMediaPlayer* main_music_;
+    QMediaPlaylist* playlist_;
+    QMediaPlayer* shot_sound_;
+    GameOverMenu* game_over_menu_;
+    QGraphicsProxyWidget* graphics_widget_;
 
 
     QTimer* move_hero_timer_;
@@ -51,10 +67,14 @@ private:
     //QTimer* shooting_timer_;
     //QTimer* enemies_refrest_timer_;
     QTimer* intersections_refresh_timer_;
-    bool is_first_shot_;
-    QProgressBar* health_bar_;
+    //bool is_first_shot_;
     //Score score_counter;
-    Score* score_;
+
+//    QAudioOutput* output_;
+
+    //QSound* music_;
+
+    //QSoundEffect music_;
     //QLabel* score_;
 
     //Hero hero;
@@ -68,12 +88,17 @@ private slots:
     void manageEnemiesTimerEvent();
     void manageIntersections();
 
+    void restartGame();
+    void showMainMenu();
+
     //void manageEnemyBulletsTimerEvent();
 public slots:
     void stopGame();
     //void decreaseScore();
-//signals:
+signals:
 //    void makeMoreDifficult();
+    void restartGameSignal();
+    void ShowMainMenuSignal();
 };
 
 #endif // SCENE_H

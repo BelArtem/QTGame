@@ -10,7 +10,8 @@ class Hero: public QObject
     Q_OBJECT
 public:
     Hero();
-    ~Hero() {delete shoot_timer_;};
+    //    ~Hero() {delete shoot_timer_;};
+    ~Hero() {};
 
     void setHorizontalSpeed(int speed);
     void setVerticalSpeed(int speed);
@@ -28,8 +29,8 @@ public:
     QPolygon getHitBox();
     bool getEliminated();
     int getHP();
-    void stopShootingTimer();
-    void startShootingTimer();
+    //void stopShootingTimer();
+    //void startShootingTimer();
 
 
 private:
@@ -42,14 +43,14 @@ private:
     int y_coordinate_;
     bool is_eliminated_;
     int hp_;
-    QTimer* shoot_timer_;
+    //QTimer* shoot_timer_;
 
 signals:
     void isDestroyed();
-    void bulletInfo(BulletType type,int posX, int posY);
+    //void bulletInfo(BulletType type,int posX, int posY);
 
 public slots:
-    void shootTimerEvent();
+    //void shootTimerEvent();
 };
 
 #endif // HERO_H

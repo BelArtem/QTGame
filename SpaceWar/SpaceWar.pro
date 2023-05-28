@@ -1,4 +1,5 @@
 QT       += core gui
+QT += multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,9 +16,11 @@ SOURCES += \
     enemybullet.cpp \
     enemygenerator.cpp \
     enemytype1.cpp \
+    gameovermenu.cpp \
     hero.cpp \
     herobullet.cpp \
     main.cpp \
+    mainmenu.cpp \
     mainwindow.cpp \
     model.cpp \
     scene.cpp \
@@ -30,8 +33,10 @@ HEADERS += \
     enemybullet.h \
     enemygenerator.h \
     enemytype1.h \
+    gameovermenu.h \
     hero.h \
     herobullet.h \
+    mainmenu.h \
     mainwindow.h \
     model.h \
     scene.h \

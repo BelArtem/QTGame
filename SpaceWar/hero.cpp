@@ -5,21 +5,21 @@ Hero::Hero()
     //image_ = QImage(":/images/sources/images/hero.png");
     image_ = QPixmap(":/images/sources/images/hero.png");
     QVector<QPoint> list = {{99,65}, {90,56}, {87,39}, {79,25}, {24,16}
-                         , {14,1}, {5,5}, {10,18}, {11,39}, {2,50}, {0,64}
-                         , {0,72}, {2,86}, {11,97}, {10,118}, {5,131}
-                         , {13,135}, {19,132}, {25,118}, {80,111}, {87,97}
-                         , {88,82}, {98,73}};
+                            , {14,1}, {5,5}, {10,18}, {11,39}, {2,50}, {0,64}
+                            , {0,72}, {2,86}, {11,97}, {10,118}, {5,131}
+                            , {13,135}, {19,132}, {25,118}, {80,111}, {87,97}
+                            , {88,82}, {98,73}};
     hitBox_ = QPolygon(list);
-    horizontal_speed_ = 950;
-    vertical_speed_ = 950;
+    horizontal_speed_ = 850;
+    vertical_speed_ = 850;
     x_coordinate_ = 0;
     y_coordinate_ = 0;
     is_eliminated_ = false;
     hp_ = 100;
-    shoot_timer_ = new QTimer();
-    shoot_timer_->setInterval(400);
-    shoot_timer_->start();
-    QObject::connect(shoot_timer_, &QTimer::timeout, this, &Hero::shootTimerEvent);
+    //    shoot_timer_ = new QTimer();
+    //    shoot_timer_->setInterval(400);
+    //    shoot_timer_->start();
+    //    QObject::connect(shoot_timer_, &QTimer::timeout, this, &Hero::shootTimerEvent);
 }
 
 void Hero::setHorizontalSpeed(int speed){
@@ -90,13 +90,13 @@ int Hero::getHP(){
     return hp_;
 }
 
-void Hero::stopShootingTimer(){
-    shoot_timer_->stop();
-}
-void Hero::startShootingTimer(){
-    shoot_timer_->start();
-}
+//void Hero::stopShootingTimer(){
+//    shoot_timer_->stop();
+//}
+//void Hero::startShootingTimer(){
+//    shoot_timer_->start();
+//}
 
-void Hero::shootTimerEvent(){
-    emit bulletInfo(BulletType::Hero, this->x_coordinate_, this->y_coordinate_);
-}
+//void Hero::shootTimerEvent(){
+//    emit bulletInfo(BulletType::Hero, this->x_coordinate_, this->y_coordinate_);
+//}

@@ -9,9 +9,13 @@ EnemyGenerator::EnemyGenerator()
 
 Enemy* EnemyGenerator::generateEnemy(EnemyType type, int xPos){
     Enemy* newEnemy = nullptr;
-    switch(type){
+    switch(type)
+    {
         case EnemyType::EnemyType1:
             newEnemy = new EnemyType1();
+            break;
+        default:
+            qFatal("fatal error");
     }
     //int randomHeight = qrand() % (981 - newEnemy->image_.height());
     //QRandomGenerator gen;
