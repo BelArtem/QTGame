@@ -14,7 +14,6 @@
 class MainMenu : public QGraphicsScene
 {
     Q_OBJECT
-
 public:
     MainMenu(QObject* parent = 0);
     virtual ~MainMenu();
@@ -27,10 +26,8 @@ private:
 private:
     QWidget* widget_;
     QGridLayout* layout_;
-    //QVBoxLayout* buttons_layout_;
     QPushButton* start_button_;
     QPushButton* exit_button_;
-
     QMediaPlayer* menu_music_;
     QMediaPlaylist* menu_playlist_;
 

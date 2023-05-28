@@ -8,6 +8,7 @@ Enemy::Enemy()
 void Enemy::startShootTimer(){
     shoot_timer_->start();
 }
+
 void Enemy::stopShootTimer(){
     shoot_timer_->stop();
 }

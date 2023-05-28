@@ -11,8 +11,6 @@ public:
     ~EnemyGenerator() = default;
 
     Enemy* generateEnemy(EnemyType type, int xPos);
-    //Enemy* generateAnyEnemy(int xPos);
-
 };
 
 #endif // ENEMYGENERATOR_H

@@ -11,10 +11,6 @@ public:
     HeroBullet(int xPos, int yPos, int horizontalSpeed = 1000);
     virtual ~HeroBullet() {};
     QPolygon getHitbox() override;
-
-    //bool isNeededToBeDeleted(QGraphicsScene* scene);
-    //signals:
-    //    void destroyHeroBullet(this);
 };
 
 #endif // HEROBULLET_H

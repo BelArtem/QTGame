@@ -21,8 +21,6 @@ public:
     ~Model();
 
     Hero& getHero();
-    //QVector<Enemy*> getEnemies();
-    //void generateEnemy(EnemyType type,int posX, int posY);
     QVector<QGraphicsPixmapItem*> getEnemiesPixmapItems();
     void updateEnemiesCoordinates(int interval);
     void clearUnusedEnemies();
@@ -30,36 +28,26 @@ public:
     void setRandomizerAreaHeight(int height);
     void setAreaWidth(int width);
     size_t getEnemiesAmount();
-    //QVector<Bullet*>* getAllEnemyBullets();
-    //void getAllEnemyBullets(QVector<Bullet*>& vec);
     BulletManager* getBulletManager();
     QVector<Enemy*>& getEnemies();
     void stopAllEvents();
     void startSpawnTimer();
     void stopSpawnTimer();
 
-
-
 private:
     BulletManager bullet_manager_;
-
     QVector<Enemy*> enemies_;
     Hero hero_;
     QTimer* spawn_enemy_timer_;
     int randomizer_area_height_;
     int area_width_;
     EnemyGenerator generator_;
-    //QTimer* getBulletsTimer_;
 
 private slots:
     void spawnEnemyTimerEvent();
-    //void
 
 public slots:
     void increaseSpawnSpeed(int millisec);
-signals:
-    //void enemyPassed();
-
 };
 
 #endif // MODEL_H
