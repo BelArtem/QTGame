@@ -13,6 +13,7 @@ public:
 
     void addScore(int score);
     int getScore();
+    void setScore(int score);
 
 private:
     int score_;

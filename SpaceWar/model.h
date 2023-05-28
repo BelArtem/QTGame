@@ -18,14 +18,15 @@ class Model: public QObject
     Q_OBJECT
 public:
     Model();
-    ~Model() = default;
+    ~Model();
 
     Hero& getHero();
     //QVector<Enemy*> getEnemies();
     //void generateEnemy(EnemyType type,int posX, int posY);
     QVector<QGraphicsPixmapItem*> getEnemiesPixmapItems();
     void updateEnemiesCoordinates(int interval);
-    void clearEnemies();
+    void clearUnusedEnemies();
+    void clearAllEnemies();
     void setRandomizerAreaHeight(int height);
     void setAreaWidth(int width);
     size_t getEnemiesAmount();
@@ -34,13 +35,13 @@ public:
     BulletManager* getBulletManager();
     QVector<Enemy*>& getEnemies();
     void stopAllEvents();
+    void startSpawnTimer();
+    void stopSpawnTimer();
 
 
 
 private:
     BulletManager bullet_manager_;
-
-
 
     QVector<Enemy*> enemies_;
     Hero hero_;

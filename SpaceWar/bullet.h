@@ -9,6 +9,8 @@ public:
     Bullet();
     virtual ~Bullet() = default;
 
+    virtual QPolygon getHitbox() = 0;
+
     QPixmap image_;
     QPolygon hitBox_;
     int horizontal_speed_;
@@ -17,7 +19,6 @@ public:
     bool is_eliminated_;
     int damage_;
 
-    virtual QPolygon getHitbox() = 0;
 
     //virtual void clearBullets(QGraphicsScene* scene) = 0;
 };

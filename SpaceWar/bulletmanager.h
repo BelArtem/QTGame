@@ -27,7 +27,8 @@ public:
     //QGraphicsItemGroup* getBulletsItemGroup();
     QVector<QGraphicsPixmapItem*> getBulletsPixmapItems();
     void updateBulletsCoordinates(int interval);
-    void clearBullets(QGraphicsScene* scene);
+    void clearUnusedBullets(QGraphicsScene* scene);
+    void clearAllBullets();
     size_t getHeroBulletsAmount();
     size_t getEnemyBulletsAmount();
     QVector<Bullet*>& getHeroBullets();

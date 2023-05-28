@@ -9,11 +9,11 @@ EnemyType1::EnemyType1()
     image_.scaledToWidth(60);
     //QVector<QPoint> list = {{33,13}, {26,6}, {18,7}, {5,13}, {18,19}, {26,19}};
     QVector<QPoint> list = {{5,60}, {1,49}, {1,42}, {15,23}, {35,11}, {64,1}, {95,1}
-                           , {129,11}, {129,110}, {95,120}, {64,120}, {29,106},
-                           {13,95}, {1,80}, {1,71}};
+                            , {129,11}, {129,110}, {95,120}, {64,120}, {29,106},
+                            {13,95}, {1,80}, {1,71}};
     hitBox_ = QPolygon(list);
-//    horizontal_speed_ = -600;
-    horizontal_speed_ = -600;
+    //    horizontal_speed_ = -600;
+    horizontal_speed_ = -500;
     x_coordinate_ = 0;
     y_coordinate_ = 0;
     is_eliminated_ = false;
@@ -31,8 +31,8 @@ EnemyType1::EnemyType1(int xPos, int yPos, int horizontalSpeed){
     image_.scaledToWidth(130);
     //QVector<QPoint> list = {{75,60}, {69,54}, {62,54}, {48,60}, {62,66}, {69,66}};
     QVector<QPoint> list = {{5,60}, {1,49}, {1,42}, {15,23}, {35,11}, {64,1}, {95,1}
-                           , {129,11}, {129,110}, {95,120}, {64,120}, {29,106},
-                           {13,95}, {1,80}, {1,71}};
+                            , {129,11}, {129,110}, {95,120}, {64,120}, {29,106},
+                            {13,95}, {1,80}, {1,71}};
     hitBox_ = QPolygon(list);
     horizontal_speed_ = horizontalSpeed;
     x_coordinate_ = xPos;
