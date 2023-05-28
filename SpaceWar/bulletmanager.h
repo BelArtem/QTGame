@@ -14,17 +14,14 @@ enum class BulletType{
     EnemyType1
 };
 
-class BulletManager: public QObject {
+class BulletManager: public QObject
+{
     Q_OBJECT
 public:
-    //BulletManager(QObject* parent = 0);
     BulletManager();
-    //~BulletManager() = default;
     virtual ~BulletManager() {};
 
     void addBullet(BulletType type,int posX, int posY);
-    //void addEnemyBullet(Bullet* bulet);
-    //QGraphicsItemGroup* getBulletsItemGroup();
     QVector<QGraphicsPixmapItem*> getBulletsPixmapItems();
     void updateBulletsCoordinates(int interval);
     void clearUnusedBullets(QGraphicsScene* scene);
@@ -33,20 +30,12 @@ public:
     size_t getEnemyBulletsAmount();
     QVector<Bullet*>& getHeroBullets();
     QVector<Bullet*>& getEnemyBullets();
-    //QVector<Bullet*> hero_bullets_;
-
-    //QVector<Bullet*> hero_bullets_;
-    //QVector<Bullet*> enemy_bullets_;
-
 
 private:
     QVector<Bullet*> hero_bullets_;
     QVector<Bullet*> enemy_bullets_;
-    //QTimer* bulletsClearTimer_;
 
 public slots:
-    //void updateBulletsCoordinates();
-    //void heroBulletRemove();
     void addBulletEvent(BulletType type,int posX, int posY);
 };
 

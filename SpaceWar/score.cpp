@@ -19,7 +19,6 @@ void Score::addScore(int score){
         emit makeMoreDifficult(40);
     }
     setPlainText(QString("Score:") + QString::number(score_));
-
 }
 
 void Score::setScore(int score){

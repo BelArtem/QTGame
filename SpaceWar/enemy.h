@@ -7,7 +7,6 @@
 
 enum class EnemyType{
     EnemyType1 = 0
-
 };
 
 class Enemy: public QObject
@@ -16,6 +15,8 @@ class Enemy: public QObject
 public:
     Enemy();
     virtual ~Enemy() {delete shoot_timer_;};
+
+    virtual QPolygon getHitbox() = 0;
 
     QPixmap image_;
     QPolygon hitBox_;
@@ -27,16 +28,6 @@ public:
     int hp_;
     void startShootTimer();
     void stopShootTimer();
-    //QVector<Bullet*> bullets_;
-
-
-    //virtual void clearBullets() = 0;
-    virtual QPolygon getHitbox() = 0;
-    //virtual QVector<Bullet*>& getBullets() = 0;
-    //public slots:
-    //    void getTimerEvent();
-    //signals:
-    //    virtual void bulletInfo (BulletType type,int posX, int posY) = 0;
 };
 
 #endif // ENEMY_H

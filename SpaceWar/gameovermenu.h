@@ -8,7 +8,6 @@
 class GameOverMenu: public QWidget
 {
     Q_OBJECT
-
 public:
     GameOverMenu(QWidget* parent = 0);
     virtual ~GameOverMenu();
@@ -18,7 +17,6 @@ private:
 
 private:
     QGridLayout* layout_;
-    //QVBoxLayout* buttons_layout_;
     QPushButton* restart_button_;
     QPushButton* menu_button_;
 

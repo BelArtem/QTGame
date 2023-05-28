@@ -3,7 +3,6 @@
 EnemyBullet::EnemyBullet()
 {
     image_ = QPixmap(":/images/sources/images/enemy1bullet.png");
-    //QVector<QPoint> list = {{33,13}, {26,6}, {18,7}, {5,13}, {18,19}, {26,19}};
     QVector<QPoint> list = {{51,61}, {57, 55}, {63,55}, {78,61}, {63,67}, {57,67}};
     hitBox_ = QPolygon(list);
     horizontal_speed_ = 1000;
@@ -15,7 +14,6 @@ EnemyBullet::EnemyBullet()
 
 EnemyBullet::EnemyBullet(int xPos, int yPos, int horizontalSpeed){
     image_ = QPixmap(":/images/sources/images/enemy1bullet.png");
-    //QVector<QPoint> list = {{33,13}, {26,6}, {18,7}, {5,13}, {18,19}, {26,19}};
     QVector<QPoint> list = {{51,61}, {57, 55}, {63,55}, {78,61}, {63,67}, {57,67}};
     hitBox_ = QPolygon(list);
     horizontal_speed_ = horizontalSpeed;

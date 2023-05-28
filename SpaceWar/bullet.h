@@ -18,9 +18,6 @@ public:
     int y_coordinate_;
     bool is_eliminated_;
     int damage_;
-
-
-    //virtual void clearBullets(QGraphicsScene* scene) = 0;
 };
 
 #endif // BULLET_H

@@ -2,7 +2,6 @@
 
 Hero::Hero()
 {
-    //image_ = QImage(":/images/sources/images/hero.png");
     image_ = QPixmap(":/images/sources/images/hero.png");
     QVector<QPoint> list = {{99,65}, {90,56}, {87,39}, {79,25}, {24,16}
                             , {14,1}, {5,5}, {10,18}, {11,39}, {2,50}, {0,64}
@@ -16,10 +15,6 @@ Hero::Hero()
     y_coordinate_ = 0;
     is_eliminated_ = false;
     hp_ = 100;
-    //    shoot_timer_ = new QTimer();
-    //    shoot_timer_->setInterval(400);
-    //    shoot_timer_->start();
-    //    QObject::connect(shoot_timer_, &QTimer::timeout, this, &Hero::shootTimerEvent);
 }
 
 void Hero::setHorizontalSpeed(int speed){
@@ -37,10 +32,6 @@ void Hero::setXCoordinate(int x){
 void Hero::setYCoordinate(int y){
     y_coordinate_ = y;
 }
-
-//QImage Hero::getImage(){
-//    return image_;
-//}
 
 void Hero::setEliminated (bool flag){
     is_eliminated_ = flag;
@@ -89,14 +80,3 @@ bool Hero::getEliminated(){
 int Hero::getHP(){
     return hp_;
 }
-
-//void Hero::stopShootingTimer(){
-//    shoot_timer_->stop();
-//}
-//void Hero::startShootingTimer(){
-//    shoot_timer_->start();
-//}
-
-//void Hero::shootTimerEvent(){
-//    emit bulletInfo(BulletType::Hero, this->x_coordinate_, this->y_coordinate_);
-//}
